@@ -1,3 +1,5 @@
-# User Interface for the FAF Galactic War Project
+This is a React frontend for a meta-game for the real-time strategy game "Supreme Commander". 
+The corresponding backend is https://github.com/FAForever/gw-backend
+More information can be found at faforever.com
 
-TODO fill this with content
+Development has been on hold for several years now.
