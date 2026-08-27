@@ -26,14 +26,14 @@ class SolarSystem extends React.Component {
 
    handleClick(e) {
 
-      const fps = this.props.simSettings.fps;
+      const animationFps = 60;
       if (this.state.isExpanded === false) {
-         const animSteps = Math.round(this.state.animDuration * fps);
+         const animSteps = Math.round(this.state.animDuration * animationFps);
          var current = this.state.isExpanded;
          var goal = 1;
          var current = this.state.scaleFactor;
          clearInterval(this.state.intervalID);
-         var intervalID = setInterval(() => this.animExpand(animSteps, goal, current), Math.floor(1000 / fps));
+         var intervalID = setInterval(() => this.animExpand(animSteps, goal, current), Math.floor(1000 / animationFps));
          this.setState({isExpanded: true,
                         animProgress: 0,
                         intervalID: intervalID});
@@ -41,12 +41,12 @@ class SolarSystem extends React.Component {
          this.props.funcSystemSelect(this.props.id, true)
       }
       else {
-         const animSteps = Math.round(this.state.animDuration * fps);
+         const animSteps = Math.round(this.state.animDuration * animationFps);
          var current = this.state.isExpanded;
          var goal = 0;
          var current = this.state.scaleFactor;
          clearInterval(this.state.intervalID);
-         var intervalID = setInterval(() => this.animExpand(animSteps, goal, current), Math.floor(1000 / fps));
+         var intervalID = setInterval(() => this.animExpand(animSteps, goal, current), Math.floor(1000 / animationFps));
          this.setState({isExpanded: false,
                         animProgress: 0,
                         intervalID: intervalID});
