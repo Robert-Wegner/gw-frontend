@@ -62,7 +62,7 @@ class Satellite extends React.Component {
         {statusIcon && (
           <StatusBar
             height={statusLogoSize}
-            distance={-objectSize * 0.5 - statusLogoSize - 4}
+            distance={objectSize * 0.5 + 5}
             contents={[<img key="status" alt={this.props.status} src={statusIcon} style={{ height: "100%", width: "auto", maxWidth: statusLogoSize * 1.8 }} />]}
           />
         )}
