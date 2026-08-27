@@ -25,7 +25,6 @@ class DragBox extends React.Component {
 
    }
    componentDidMount() {
-
       this.setState({lastOffsetTop: this.node.offsetTop,
                      lastOffsetLeft: this.node.offsetLeft});
    }

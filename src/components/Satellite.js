@@ -82,7 +82,9 @@ class Satellite extends React.Component {
     return (
       <div style={{ position: "absolute" }}>
         <div style={{ position: "absolute", transform: `translate(${x}px, ${y}px)` }}>
-          <Selector width={objectSize * 2.4} height={objectSize * 2.4} isOpened={this.props.isSelected} />
+          {this.props.isSelected && (
+            <Selector width={objectSize * 2.4} height={objectSize * 2.4} isOpened />
+          )}
           {displayScale > planetScaleUiThreshold ? statusBars : null}
         </div>
         <button
