@@ -71,55 +71,30 @@ class GalaxyMap extends React.Component {
    }
 
    handleWheel(e) {
-
-      const mapScale = this.state.simSettings.mapScale;
-      // Amplify the original wheel step for a more useful map-scale range.
+      const zoomIn = e.deltaY < 0;
+      const cursorX = e.pageX;
+      const cursorY = e.pageY;
       const zoomFactor = 2;
-      var newScale = mapScale * (e.deltaY < 0 ? zoomFactor : 1 / zoomFactor);
-
       const position = ReactDOM.findDOMNode(this.dragBoxNode).getBoundingClientRect();
-      var i = 0;
-      while ((newScale * this.props.mapWidth <= this.props.width - (this.props.frameDim.leftSize + this.props.frameDim.rightSize)//limiting max zoom out
-            ||
-            newScale * this.props.mapHeight <= this.props.height - (this.props.frameDim.topSize + this.props.frameDim.bottomSize))
-            &&
-            i < 10) {
-               i++
-               newScale = (mapScale + newScale) / 2;
-            }
-
-      //setting zoom to zoom in on the mouse cursor by moving the DragBox according to the cursor position and mapWidth/Height increase
-
-
-
-      const distanceLeft = position.left;
-      const distanceTop = position.top;
-      if ((distanceLeft < -200000 || distanceTop < -200000) && newScale >= mapScale) {
-         newScale = mapScale;
-      }
-      const horCursorPosRatio = (e.pageX - distanceLeft) / (mapScale * this.props.mapWidth);
-      const widthDiff = (newScale * this.props.mapWidth) - (mapScale * this.props.mapWidth);
-      const verCursorPosRatio = (e.pageY - distanceTop) / (mapScale * this.props.mapHeight);
-      const heightDiff = (newScale * this.props.mapHeight) - (mapScale * this.props.mapHeight);
-      const moveLeft = horCursorPosRatio * widthDiff;
-      const moveTop = verCursorPosRatio * heightDiff;
-
-
-
-      var newLeftShift = this.state.leftShift - moveLeft;
-      var newTopShift = this.state.topShift - moveTop;
-      const viewport = this.getViewport()
-      const minTop = -(this.props.mapHeight * mapScale - viewport.height);
-      const minLeft = -(this.props.mapWidth * mapScale - viewport.width);
-      newTopShift = (newTopShift > 0) ? 0 : newTopShift;
-      newTopShift = (newTopShift < minTop) ? minTop : newTopShift;
-      newLeftShift = (newLeftShift > 0) ? 0 : newLeftShift;
-      newLeftShift = (newLeftShift < minLeft) ? minLeft : newLeftShift;
-
-
-      const tempSimSettings = { ...this.state.simSettings, mapScale: newScale };
-
-      this.setState({simSettings: tempSimSettings, leftShift: newLeftShift, topShift: newTopShift});
+      this.setState((state) => {
+         const mapScale = state.simSettings.mapScale;
+         const newScale = mapScale * (zoomIn ? zoomFactor : 1 / zoomFactor);
+         const viewportWidth = this.props.width - this.props.frameDim.leftSize - this.props.frameDim.rightSize;
+         const viewportHeight = this.props.height - this.props.frameDim.topSize - this.props.frameDim.bottomSize;
+         const minScale = Math.max(viewportWidth / this.props.mapWidth, viewportHeight / this.props.mapHeight);
+         const boundedScale = Math.max(minScale, newScale);
+         const cursorRatioX = (cursorX - position.left) / (mapScale * this.props.mapWidth);
+         const cursorRatioY = (cursorY - position.top) / (mapScale * this.props.mapHeight);
+         const left = state.leftShift - cursorRatioX * (boundedScale - mapScale) * this.props.mapWidth;
+         const top = state.topShift - cursorRatioY * (boundedScale - mapScale) * this.props.mapHeight;
+         const minLeft = Math.min(0, viewportWidth - boundedScale * this.props.mapWidth);
+         const minTop = Math.min(0, viewportHeight - boundedScale * this.props.mapHeight);
+         return {
+            simSettings: { ...state.simSettings, mapScale: boundedScale },
+            leftShift: Math.max(minLeft, Math.min(0, left)),
+            topShift: Math.max(minTop, Math.min(0, top)),
+         };
+      });
 
    }
 
