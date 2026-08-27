@@ -3,10 +3,10 @@ import React from "react";
 const LABELS = {
   startAttack: "OPEN LOBBY",
   greyedStartAttack: "OPEN LOBBY",
-  joinAttack: "JOIN ASSAULT",
-  greyedJoinAttack: "JOIN ASSAULT",
-  joinDefense: "JOIN DEFENSE",
-  greyedJoinDefense: "JOIN DEFENSE",
+  joinAttack: "JOIN LOBBY",
+  greyedJoinAttack: "JOIN LOBBY",
+  joinDefense: "JOIN LOBBY",
+  greyedJoinDefense: "JOIN LOBBY",
   leaveLobby: "LEAVE LOBBY",
   battleOngoing: "MATCH IN PROGRESS",
 };
