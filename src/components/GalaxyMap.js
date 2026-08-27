@@ -74,7 +74,7 @@ class GalaxyMap extends React.Component {
 
       const mapScale = this.state.simSettings.mapScale;
       // Amplify the original wheel step for a more useful map-scale range.
-      const zoomFactor = 1.2;
+      const zoomFactor = 2;
       var newScale = mapScale * (e.deltaY < 0 ? zoomFactor : 1 / zoomFactor);
 
       const position = ReactDOM.findDOMNode(this.dragBoxNode).getBoundingClientRect();
