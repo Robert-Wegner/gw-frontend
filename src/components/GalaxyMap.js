@@ -74,7 +74,7 @@ class GalaxyMap extends React.Component {
       const zoomIn = e.deltaY < 0;
       const cursorX = e.pageX;
       const cursorY = e.pageY;
-      const zoomFactor = 2;
+      const zoomFactor = 1.072;
       const position = ReactDOM.findDOMNode(this.dragBoxNode).getBoundingClientRect();
       this.setState((state) => {
          const mapScale = state.simSettings.mapScale;
