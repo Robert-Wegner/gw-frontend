@@ -141,7 +141,6 @@ class GalaxyMap extends React.Component {
 
 
    render() {
-      console.log("rendering GalaxyMap")
       const systemsList = this.props.systemsList;
       const simSettings = this.state.simSettings;
       const mapScale = this.state.simSettings.mapScale;

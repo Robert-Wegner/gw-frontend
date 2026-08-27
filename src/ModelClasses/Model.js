@@ -75,8 +75,9 @@ class ModelSimSettings {
     this.planetScalingExponent = 1;
     this.planetRadiusScale = 1.4;
     this.planetScaleUiThreshold = 3;
-    this.simSpeed = 0.2;
-    this.fps = 24;
+    // A modest update rate keeps panning responsive while making orbital motion visible.
+    this.simSpeed = 2.4;
+    this.fps = 12;
   }
 }
 

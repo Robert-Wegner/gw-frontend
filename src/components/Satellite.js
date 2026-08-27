@@ -50,6 +50,7 @@ class Satellite extends React.Component {
     const factionLogo = imageAssets.factionLogos[this.props.faction] || imageAssets.factionLogos.aeon;
     // Keep faction marks readable without letting them dwarf small planets.
     const factionLogoSize = Math.max(8, Math.min(18, objectSize * 0.7));
+    const statusLogoSize = Math.max(8, Math.min(16, objectSize * 0.65));
     const statusIcon = this.props.status === "lobby"
       ? imageAssets.lobby
       : this.props.status === "battle"
@@ -60,7 +61,7 @@ class Satellite extends React.Component {
       <>
         {statusIcon && (
           <StatusBar
-            height={16}
+            height={statusLogoSize}
             distance={objectSize * 0.5 + 5}
             contents={[<img key="status" alt={this.props.status} src={statusIcon} style={{ height: "100%" }} />]}
           />

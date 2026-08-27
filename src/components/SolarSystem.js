@@ -57,6 +57,15 @@ class SolarSystem extends React.Component {
 
    }
 
+   shouldComponentUpdate(nextProps, nextState) {
+      // Map drags re-render the map shell frequently; avoid rebuilding every orbit
+      // when this system's own animation and selection have not changed.
+      return nextState.scaleFactor !== this.state.scaleFactor
+         || nextState.isExpanded !== this.state.isExpanded
+         || nextProps.selectedPlanet !== this.props.selectedPlanet
+         || nextProps.simSettings.scale !== this.props.simSettings.scale;
+   }
+
    animExpand(animSteps, goal, current) {
       if (this.state.animProgress === animSteps) {
          clearInterval(this.state.intervalID);

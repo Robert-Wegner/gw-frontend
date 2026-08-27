@@ -21,12 +21,17 @@ class DragBox extends React.Component {
       this.handleMouseDown = this.handleMouseDown.bind(this);
       this.handleMouseUp = this.handleMouseUp.bind(this);
       this.handleMouseMove = this.handleMouseMove.bind(this);
+      this.flushDrag = this.flushDrag.bind(this);
 
    }
    componentDidMount() {
 
       this.setState({lastOffsetTop: this.node.offsetTop,
                      lastOffsetLeft: this.node.offsetLeft});
+   }
+
+   componentWillUnmount() {
+      if (this.dragFrame) window.cancelAnimationFrame(this.dragFrame);
    }
 
    handleMouseDown(e) {
@@ -65,7 +70,17 @@ class DragBox extends React.Component {
          newLeft = (newLeft > maxLeft) ? maxLeft : newLeft;
          newLeft = (newLeft < minLeft) ? minLeft : newLeft;
 
-      this.props.returnShiftedPosition(newLeft, newTop)
+      this.pendingDrag = { left: newLeft, top: newTop };
+      if (!this.dragFrame) this.dragFrame = window.requestAnimationFrame(this.flushDrag);
+      }
+   }
+
+   flushDrag() {
+      this.dragFrame = null;
+      if (this.pendingDrag) {
+         const { left, top } = this.pendingDrag;
+         this.pendingDrag = null;
+         this.props.returnShiftedPosition(left, top);
       }
    }
 
