@@ -8,7 +8,7 @@ const LABELS = {
   joinDefense: "JOIN DEFENSE",
   greyedJoinDefense: "JOIN DEFENSE",
   leaveLobby: "LEAVE LOBBY",
-  battleOngoing: "BATTLE IN PROGRESS",
+  battleOngoing: "MATCH IN PROGRESS",
 };
 
 function ActionButton({ buttonType, buttonFunction }) {

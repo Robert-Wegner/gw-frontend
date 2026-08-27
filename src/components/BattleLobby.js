@@ -25,7 +25,7 @@ class BattleLobby extends React.Component {
       return (
 
    		<div id='lobbybox' className="themeBackgroundDefault themeBorderDefault themeTextDefault themeShadowDefault">
-            {this.props.status === "battle" ? "BATTLE IN PROGRESS" : "ASSAULT LOBBY"}
+            {this.props.status === "battle" ? "MATCH IN PROGRESS" : "ASSAULT LOBBY"}
             <span style = {{float: "right"}}>{Math.round(this.props.waitingProgress)}%</span> <br/>
    			{teams}
 
