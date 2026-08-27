@@ -13,7 +13,7 @@ class BattleLobby extends React.Component {
       var teams = [];
       const battleParticipants = this.props.battleParticipants;
       for (var i = 0; i < battleParticipants.length; i++) {
-         teams.push(	<span style={{fontWeight: "bold"}} key = {"lobbySpan" + i.toString()}>{battleParticipants[i].factionName}</span>)
+         teams.push(	<span style={{fontWeight: "bold"}} key = {"lobbySpan" + i.toString()}>{formatFaction(battleParticipants[i].factionName)}</span>)
 
          for (var j = 0; j < this.props.maxPlayers/2; j++) {
             teams.push(  <div className="themeBorderDefault playerSlot" key = {"lobbyDiv" + i.toString() + j.toString()}>
@@ -32,6 +32,12 @@ class BattleLobby extends React.Component {
    		</div>
       )
    }
+}
+
+function formatFaction(faction) {
+   return faction.toLowerCase() === "uef"
+      ? "UEF"
+      : faction.charAt(0).toUpperCase() + faction.slice(1).toLowerCase();
 }
 
 BattleLobby.propTypes = propTypesTemplate;

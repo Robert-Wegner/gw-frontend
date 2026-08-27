@@ -18,7 +18,7 @@ class FooterBar extends React.Component {
 
                <div style = {{marginLeft: "3%", fontSize: "20px"}}>
                   <div>
-                     {this.props.playerInfo.displayName} · {this.props.playerInfo.faction.toUpperCase()}
+                     {this.props.playerInfo.displayName} · {formatFaction(this.props.playerInfo.faction)}
                   </div>
                </div>
                <div  style = {{marginRight: "3%"}}
@@ -31,6 +31,12 @@ class FooterBar extends React.Component {
 
       )
    }
+}
+
+function formatFaction(faction) {
+   return faction.toLowerCase() === "uef"
+      ? "UEF"
+      : faction.charAt(0).toUpperCase() + faction.slice(1).toLowerCase();
 }
 
 FooterBar.propTypes = propTypesTemplate;
