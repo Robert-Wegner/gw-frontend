@@ -30,14 +30,8 @@ class GalacticWar extends Component {
     window.removeEventListener("resize", this.resizeWindow);
   }
 
-  componentDidUpdate() {
-    if (this.state.globalUpdate) {
-      this.setState({ globalUpdate: false });
-    }
-  }
-
   forceUpdateFromModel() {
-    this.setState({ globalUpdate: true });
+    this.setState((state) => ({ globalUpdate: !state.globalUpdate }));
   }
 
   resizeWindow() {
@@ -78,7 +72,6 @@ class GalacticWar extends Component {
           selectedPlanet={selectedPlanet ? selectedPlanet.id : "none"}
           playerFaction={playerInfo.faction}
           funcPlanetOnClick={this.planetOnClick}
-          globalUpdate={this.state.globalUpdate}
         />
 
         <div className="demo-title themeTextDefault">

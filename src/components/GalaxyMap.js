@@ -190,7 +190,6 @@ class GalaxyMap extends React.Component {
             selectedPlanet = {this.props.selectedPlanet}
             funcPlanetOnClick = {this.props.funcPlanetOnClick}
             funcSystemSelect = {this.handleSystemSelect}
-            globalUpdate = {this.props.globalUpdate}
             key = {i} /> : <div key = {i}></div>)
 
 
