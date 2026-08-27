@@ -4,13 +4,13 @@ import { Model } from "../ModelClasses/Model.js";
 const FACTIONS = ["aeon", "cybran", "uef", "seraphim"];
 
 export const shopItems = [
-  { image: imageAssets.shop.tank, name: "Heavy tank", itemId: "heavy", price: 240 },
-  { image: imageAssets.shop.tank, name: "Scout", itemId: "scout", price: 120 },
-  { image: imageAssets.shop.tank, name: "Artillery", itemId: "artillery", price: 420 },
-  { image: imageAssets.shop.tank, name: "Shield unit", itemId: "shield", price: 320 },
-  { image: imageAssets.shop.tank, name: "Engineer", itemId: "engineer", price: 180 },
-  { image: imageAssets.shop.tank, name: "Interceptor", itemId: "interceptor", price: 280 },
-];
+  { image: imageAssets.shop.tank, name: "Item #1", itemId: "heavy", price: 240 },
+  { image: imageAssets.shop.tank, name: "Item #2", itemId: "scout", price: 120 },
+  { image: imageAssets.shop.tank, name: "Item #3", itemId: "artillery", price: 420 },
+  { image: imageAssets.shop.tank, name: "Item #4", itemId: "shield", price: 320 },
+  { image: imageAssets.shop.tank, name: "Item #5", itemId: "engineer", price: 180 },
+  { image: imageAssets.shop.tank, name: "Item #6", itemId: "interceptor", price: 280 },
+]; 
 
 const systems = [
   { id: "aurelia", name: "Aurelia", top: 150, left: 150, faction: "aeon", planets: ["Aurora", "Lumen"], neighbours: ["draconis", "mirach"] },

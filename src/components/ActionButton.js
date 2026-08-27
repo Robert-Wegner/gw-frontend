@@ -1,8 +1,8 @@
 import React from "react";
 
 const LABELS = {
-  startAttack: "START ASSAULT",
-  greyedStartAttack: "START ASSAULT",
+  startAttack: "OPEN LOBBY",
+  greyedStartAttack: "OPEN LOBBY",
   joinAttack: "JOIN ASSAULT",
   greyedJoinAttack: "JOIN ASSAULT",
   joinDefense: "JOIN DEFENSE",

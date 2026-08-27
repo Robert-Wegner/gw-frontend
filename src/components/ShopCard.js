@@ -31,7 +31,7 @@ class ShopCard extends React.Component {
       return (
          <div style = {{width: "100%", height: "100%", display: "flex"}}>
             <div style = {{width: "auto", height: "100%"}}>
-               <img alt="" style = {{width: "auto", height: "100%"}} src = {this.props.item.image}/>
+               <span aria-hidden="true" style = {{fontSize: "2.2em", lineHeight: 1}}>⚙</span>
             </div>
             <div style = {{display: "flex", justifyContent: "center", width: "100%", flexDirection: "column", whiteSpace: "nowrap"}}>
                <div style = {{textAlign: "center"}}>{this.props.item.name}</div>
