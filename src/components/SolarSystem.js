@@ -16,8 +16,6 @@ class SolarSystem extends React.Component {
          isExpanded: false,
          animDuration: 1, // in seconds
          animProgress: 0,
-         animFrom: 0,
-         animGoal: 0,
          scaleFactor: 0,
          lastProps: this.props
       };
@@ -29,24 +27,28 @@ class SolarSystem extends React.Component {
    handleClick(e) {
 
       const fps = this.props.simSettings.fps;
-      const animSteps = Math.max(1, Math.round(this.state.animDuration * fps));
-      const goal = this.state.isExpanded ? 0 : 1;
-      clearInterval(this.state.intervalID);
-      const intervalID = setInterval(() => this.animExpand(animSteps), Math.floor(1000 / fps));
       if (this.state.isExpanded === false) {
+         const animSteps = Math.round(this.state.animDuration * fps);
+         var current = this.state.isExpanded;
+         var goal = 1;
+         var current = this.state.scaleFactor;
+         clearInterval(this.state.intervalID);
+         var intervalID = setInterval(() => this.animExpand(animSteps, goal, current), Math.floor(1000 / fps));
          this.setState({isExpanded: true,
                         animProgress: 0,
-                        animFrom: this.state.scaleFactor,
-                        animGoal: goal,
                         intervalID: intervalID});
 
          this.props.funcSystemSelect(this.props.id, true)
       }
       else {
+         const animSteps = Math.round(this.state.animDuration * fps);
+         var current = this.state.isExpanded;
+         var goal = 0;
+         var current = this.state.scaleFactor;
+         clearInterval(this.state.intervalID);
+         var intervalID = setInterval(() => this.animExpand(animSteps, goal, current), Math.floor(1000 / fps));
          this.setState({isExpanded: false,
                         animProgress: 0,
-                        animFrom: this.state.scaleFactor,
-                        animGoal: goal,
                         intervalID: intervalID});
 
       }
@@ -64,17 +66,21 @@ class SolarSystem extends React.Component {
          || nextProps.simSettings.scale !== this.props.simSettings.scale;
    }
 
-   animExpand(animSteps) {
-      const nextProgress = Math.min(animSteps, this.state.animProgress + 1);
-      const progress = nextProgress / animSteps;
-      const newScaleFactor = this.state.animFrom + (this.state.animGoal - this.state.animFrom) * progress;
-      if (nextProgress >= animSteps) {
+   animExpand(animSteps, goal, current) {
+      if (this.state.animProgress === animSteps) {
          clearInterval(this.state.intervalID);
-         this.setState({ scaleFactor: this.state.animGoal, animProgress: 0, intervalID: null });
-         if (!this.state.isExpanded) this.props.funcSystemSelect(this.props.id, false);
-         return;
+         this.setState({scaleFactor: goal,
+                        animProgress: 0});
+         if (!this.state.isExpanded) {
+            this.props.funcSystemSelect(this.props.id, false)
+         }
       }
-      this.setState({ scaleFactor: newScaleFactor, animProgress: nextProgress });
+
+      var increment = (goal - current) / animSteps;
+      const newScaleFactor = this.state.scaleFactor + increment;
+      const newAnimProgress = this.state.animProgress + 1;
+      this.setState({scaleFactor: newScaleFactor,
+                     animProgress: newAnimProgress});
    }
 
    componentWillUnmount() {
